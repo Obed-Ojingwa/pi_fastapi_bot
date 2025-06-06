@@ -1,0 +1,33 @@
+### File: app/templates/index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pi Bot Transfer</title>
+</head>
+<body>
+  <h1>Transfer PI</h1>
+  <form id="piForm">
+    Owner Address: <input type="text" id="owner"><br>
+    Amount: <input type="number" id="amount"><br>
+    Seeds: <textarea id="seeds" rows="10"></textarea><br>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    document.getElementById("piForm").onsubmit = async function(e) {
+      e.preventDefault();
+      const owner = document.getElementById("owner").value;
+      const amount = document.getElementById("amount").value;
+      const seeds = document.getElementById("seeds").value;
+      const res = await fetch("/api/transfer", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ owner, amount, seeds })
+      });
+      const data = await res.json();
+      document.getElementById("result").innerText = data.results.join("\n");
+    }
+  </script>
+</body>
+</html>
