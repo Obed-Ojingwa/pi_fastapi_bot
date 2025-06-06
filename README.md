@@ -1,6 +1,4 @@
 
-### File: README.md
-
 # Pi FastAPI Bot
 
 Send Pi from multiple seeds using a FastAPI backend.
